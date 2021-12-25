@@ -7,7 +7,7 @@ import './index.css';
 
 function Square(props) {
     return (
-        <button className="square" onClick= {props.onClick}>
+        <button className="square" onClick={props.onClick}>
             {props.value}
         </button>
     );
@@ -60,7 +60,7 @@ class Game extends React.Component {
             xIsNext: true,
         };
     }
-    
+
     handleClick(i) {
         const history = this.state.history.slice(0, this.state.stepNumber + 1);
         const current = history[history.length - 1];
@@ -72,6 +72,7 @@ class Game extends React.Component {
         this.setState({
             history: history.concat([{
                 squares: squares,
+                move: squares[i],
             }]),
             stepNumber: history.length,
             xIsNext: !this.state.xIsNext,
@@ -91,7 +92,7 @@ class Game extends React.Component {
         const winner = calculateWinner(current.squares);
         const moves = history.map((step, move) => {
                 const desc = move ?
-                    'Go to move #' + move : 
+                'Go to move #' + move + ' (' + indexToPos(move)  + ' => ' + step.move + ')': 
                     'Go to game start';
                 return (
                     <li key={move}>
@@ -155,4 +156,11 @@ function calculateWinner(squares) {
     }
   }
   return null;
+}
+
+function indexToPos(index) {
+    const mapping = ['(0,0)', '(0, 1)', '(0, 2)',
+                     '(1,0)', '(1,1)', '(1,2)',
+                     '(2,0)', '(2,1)', '(2,2)'];
+    return mapping[index];
 }
