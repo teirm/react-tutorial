@@ -36,6 +36,10 @@ button:hover {
     width: 34px;
 }
 
+.square-highlight {
+    background: #0f0;
+}
+
 .square:focus {
     outline: none;
 }
